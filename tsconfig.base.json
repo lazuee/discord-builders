@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "strict": true,
+    "sourceMap": false,
+    "declaration": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "exactOptionalPropertyTypes": false,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedParameters": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": false,
+    "experimentalDecorators": false,
+    "emitDecoratorMetadata": false,
+    "preserveConstEnums": true,
+    "resolveJsonModule": true,
+    "removeComments": false,
+    "alwaysStrict": true,
+    "pretty": true,
+    "importHelpers": true,
+    "importsNotUsedAsValues": "error",
+
+    "baseUrl": "./",
+    "rootDir": "src",
+    "typeRoots": ["node_modules/@types"],
+
+    "paths": {
+      "#root/*": ["./src/*"]
+    },
+
+    "plugins": [
+      { "transform": "typescript-transform-paths", "useRootDirs": true },
+      { "transform": "typescript-transform-paths", "useRootDirs": true, "afterDeclarations": true }
+    ]
+  },
+
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/**/*"]
+}

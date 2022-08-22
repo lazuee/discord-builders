@@ -1,0 +1,84 @@
+{
+  "description": "A Typescript template that can be used to publish a hybrid ESM/CJS NPM package.",
+  "name": "@lazuee/typescript-template",
+  "version": "0.0.1",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      },
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "default": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "files": [
+    "dist",
+    "LICENSE.md",
+    "README.md"
+  ],
+  "scripts": {
+    "release": "pnpm run build && pnpm run publish --access public",
+    "clean": "rimraf dist",
+    "build": "pnpm run clean && pnpm run build:patch && pnpm run build:esm && pnpm run build:cjs && tsp ./dist",
+    "build:patch": "pnpx ts-patch install --silent",
+    "build:esm": "tsc -p tsconfig.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json && echo { \"type\": \"commonjs\" } >> dist/cjs/package.json",
+    "lint": "pnpm run lint:prettier --check && pnpm run lint:eslint",
+    "lint:fix": "pnpm run lint:eslint --fix && pnpm run lint:prettier --write",
+    "lint:eslint": "eslint \"./src/**/*.{cjs,js,jsx,mjs,ts,tsx,json,md,mdx,css,html,yml,yaml,scss}\" --max-warnings=0",
+    "lint:prettier": "prettier \"./src/**/*.{cjs,js,jsx,mjs,ts,tsx,json,md,mdx,css,html,yml,yaml,scss}\" --ignore-unknown --loglevel warn",
+    "start": "node dist/esm/test.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
+    "eslint": "8.22.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-config-standard-with-typescript": "22.0.0",
+    "eslint-import-resolver-typescript": "3.4.2",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.4",
+    "eslint-plugin-promise": "6.0.0",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "eslint-plugin-unused-imports": "2.0.0",
+    "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
+    "ts-import-patch": "1.0.1",
+    "ts-patch": "2.0.2",
+    "tslib": "2.4.0",
+    "typescript": "^4.7.4",
+    "typescript-transform-paths": "3.3.1"
+  },
+  "homepage": "https://github.com/lazuee/typescript-template",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lazuee/typescript-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lazuee/typescript-template/issues"
+  },
+  "contributors": [
+    "lazuee <lazuee.dev@gmail.com>"
+  ]
+}
