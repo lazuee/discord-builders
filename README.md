@@ -1,6 +1,6 @@
-## typescript-template
+## discord-builders
 
-> A Typescript template that can be used to publish a hybrid ESM/CJS NPM package.
+> A Builders to easily create discord bot
 
 ### Contributing to the project 💻
 
